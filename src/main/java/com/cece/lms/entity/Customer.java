@@ -1,29 +1,22 @@
 package com.cece.lms.entity;
 
-import com.cece.lms.entity.enums.LoanStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Loan {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String customerNumber;
-    private Double amount;
-    private LocalDateTime createdAt;
-    private String scoringToken;
-
-    @Enumerated(EnumType.STRING)
-    private LoanStatus status;
-
 
 }
