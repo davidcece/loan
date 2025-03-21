@@ -32,4 +32,12 @@ public class LoanCustomerService {
         log.info("Customer subscribed successfully: {}", createdCustomer);
         return createdCustomer;
     }
+
+    public LoanCustomer getCustomer(String customerNumber) {
+        LoanCustomer existingCustomer = loanCustomerRepository.findByCustomerNumber(customerNumber);
+        if (existingCustomer == null) {
+            throw new RuntimeException("Customer does not exist.");
+        }
+        return existingCustomer;
+    }
 }
