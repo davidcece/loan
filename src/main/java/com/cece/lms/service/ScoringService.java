@@ -122,8 +122,9 @@ public class ScoringService {
                 );
 
                 if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-                    log.info("Score status queried successfully for scoring token: {}", scoringToken);
-                    return Optional.of(response.getBody());
+                    ScoringResponse score = response.getBody();
+                    log.info("Score status queried successfully for scoring token: {}", score);
+                    return Optional.of(score);
                 }
 
             } catch (Exception e) {
