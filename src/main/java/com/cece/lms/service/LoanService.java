@@ -69,8 +69,8 @@ public class LoanService {
 
 
     private void validateInitiatedLoan(String customerNumber) {
-        Optional<Loan> existingLoan = loanRepository.findByCustomerNumberAndStatus(customerNumber, LoanStatus.INITIATED);
-        if (existingLoan.isPresent()) {
+        Loan existingLoan = loanRepository.findByCustomerNumberAndStatus(customerNumber, LoanStatus.INITIATED);
+        if (existingLoan != null) {
             throw new RuntimeException("Active loan already exists.");
         }
     }
