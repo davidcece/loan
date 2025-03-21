@@ -11,8 +11,8 @@ public interface LoanRepository extends JpaRepository<Loan, Long> {
 
     @Query(value = "SELECT l.* FROM loans l JOIN customers c ON l.customer_id = c.id " +
             " WHERE c.customer_number = :customerNumber " +
-            " AND l.status = :status", nativeQuery = true)
-    Loan findByCustomerNumberAndStatus(@Param("customerNumber") String customerNumber, @Param("status") LoanStatus status);
+            " AND l.status = :status LIMIT 1", nativeQuery = true )
+    Loan findByCustomerNumberAndStatus(@Param("customerNumber") String customerNumber, @Param("status") String status);
 
     @Query(value = "SELECT l.* FROM loans l JOIN customers c ON l.customer_id = c.id " +
             " WHERE c.customer_number = :customerNumber " +
