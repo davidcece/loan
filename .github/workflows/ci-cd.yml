@@ -39,6 +39,6 @@ jobs:
       - name: 🚦 Restart Spring Boot Application on Server
         run: |
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
-            sudo pkill -f 'java -jar lms.jar' || true
+            pkill -f 'java -jar lms.jar' || true
             nohup java -jar /home/${{ secrets.SERVER_USER }}/lms.jar > lms.log 2>&1 &
           EOF
