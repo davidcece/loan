@@ -24,7 +24,7 @@ public class SOAPConnector extends WebServiceGatewaySupport {
                         SoapMessage soapMessage = (SoapMessage) message;
                         soapMessage.setSoapAction("");
 
-                        String auth = "%s:%s".formatted(username, password);
+                        String auth = String.format("%s:%s",username, password);
                         byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
                         String authHeader = "Basic " + new String(encodedAuth);
                         soapMessage.getSoapHeader().addHeaderElement(

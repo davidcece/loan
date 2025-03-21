@@ -28,15 +28,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .httpBasic(Customizer.withDefaults());
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers(
+                        "/swagger-ui/**",
+                        "/swagger-ui.html",
+                        "/v3/api-docs/**",
+                        "/webjars/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
