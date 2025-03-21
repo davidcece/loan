@@ -1,7 +1,7 @@
 package com.cece.lms.entity;
 
 import com.cece.lms.entity.enums.LoanStatus;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -67,20 +67,25 @@ public class ScoringService {
     }
 
     public ScoringApplication registerScoringClient() {
-        log.info("Registering scoring client with URL: {}", registrationUrl);
-        ScoringClientRequest request = ScoringClientRequest.builder()
-                .url(transactionsUrl)
-                .name(applicationName)
-                .username(apiUsername)
-                .password(apiPassword)
-                .build();
+        try {
+            log.info("Registering scoring client with URL: {}", registrationUrl);
+            ScoringClientRequest request = ScoringClientRequest.builder()
+                    .url(transactionsUrl)
+                    .name(applicationName)
+                    .username(apiUsername)
+                    .password(apiPassword)
+                    .build();
 
-        ScoringClientResponse response = restTemplate.postForObject(registrationUrl, request, ScoringClientResponse.class);
-        log.info("Scoring client registered with response token: {}", response.getToken());
+            ScoringClientResponse response = restTemplate.postForObject(registrationUrl, request, ScoringClientResponse.class);
+            log.info("Scoring client registered with response token: {}", response.getToken());
 
-        ScoringApplication scoringApplication = new ScoringApplication();
-        scoringApplication.setToken(response.getToken());
-        return scoringApplicationRepository.save(scoringApplication);
+            ScoringApplication scoringApplication = new ScoringApplication();
+            scoringApplication.setToken(response.getToken());
+            return scoringApplicationRepository.save(scoringApplication);
+        }catch (Exception e){
+            log.error("Error registering scoring client", e);
+            return new ScoringApplication();
+        }
     }
 
     public String initScoring(String customerNumber) {
