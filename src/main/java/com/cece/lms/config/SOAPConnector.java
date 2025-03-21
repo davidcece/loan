@@ -28,7 +28,7 @@ public class SOAPConnector extends WebServiceGatewaySupport {
                         byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(StandardCharsets.UTF_8));
                         String authHeader = "Basic " + new String(encodedAuth);
                         soapMessage.getSoapHeader().addHeaderElement(
-                                        new QName("http://schemas.xmlsoap.org/ws/2002/12/secext", "Security"))
+                                        new QName("http://schemas.xmlsoap.org/ws/2002/12/secext", "Authorization"))
                                 .setText(authHeader);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
